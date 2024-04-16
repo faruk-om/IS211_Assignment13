@@ -1,15 +1,15 @@
-def fibonacci(n):
+def fibonacci_memo(n, memo={}):
+    if n in memo:
+        return memo[n]
     if n <= 0:
         return "Input must be a positive integer"
     elif n == 1:
         return 0
     elif n == 2:
         return 1
-    else:
-        fib_0, fib_1 = 0, 1
-        for i in range(2, n):
-            fib_0, fib_1 = fib_1, fib_0 + fib_1
-        return fib_1
+    memo[n] = fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)
+    return memo[n]
+
 
 
 def gcd(a, b):
@@ -27,5 +27,4 @@ def compareTo(s1, s2):
     if s1[0] != s2[0]:
         return ord(s1[0]) - ord(s2[0])
     return compareTo(s1[1:], s2[1:])
-
 
